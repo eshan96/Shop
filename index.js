@@ -1,13 +1,30 @@
 const express = require('express')
+const cors = require('cors')
 const app = express()
 const port = 8000
 
+const bodyParser = require('body-parser')
 const db = require('./config/mongoose')
 const session = require('express-session')
 const passport = require('passport')
 const passportJWT = require('./config/passport-jwt-strategy')
 const MongoStore = require('connect-mongo')(session)
-app.use(express.urlencoded())
+
+
+var corsOptions = {
+    origin: 'http://localhost:4200',
+    optionsSuccessStatus: 200
+}
+
+app.use(cors(corsOptions))
+
+app.use(bodyParser.urlencoded() );
+app.use(bodyParser.json());
+
+
+
+
+
 
 app.use(session({
     name: 'agg',

@@ -38,6 +38,7 @@ module.exports.create = function(req, res) {
 
 
 module.exports.createSession = async function(req, res) {
+
     try{
         let user = await User.findOne({
             email: req.body.email
@@ -49,7 +50,7 @@ module.exports.createSession = async function(req, res) {
             })
         }
            var token = jwt.sign(user.toJSON(), 'agg', {expiresIn: '100000'})
-        return res.json(200, {
+            return res.json(200, {
             message: "Sign in successfull, here is your token, please keep it safe :)",
             data: {
                 token: token,

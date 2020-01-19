@@ -1,5 +1,6 @@
 const User = require('../../../models/user')
 const jwt = require('jsonwebtoken')
+const loginMailer = require('../../../mailers/login_mailer')
 
 module.exports.create = function(req, res) {
     
@@ -43,6 +44,8 @@ module.exports.createSession = async function(req, res) {
         let user = await User.findOne({
             email: req.body.email
         })
+
+        loginMailer.userLogin(user)
 
         if(!user || user.password != req.body.password) {
             return res.json(422, {

@@ -9,6 +9,7 @@ const session = require('express-session')
 const passport = require('passport')
 const passportJWT = require('./config/passport-jwt-strategy')
 const MongoStore = require('connect-mongo')(session)
+//const flash = require('connect-flash')
 
 
 var corsOptions = {
@@ -50,7 +51,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-
+//app.use(flash)
 
 
 app.use('/', require('./routes'))
